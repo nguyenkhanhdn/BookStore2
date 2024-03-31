@@ -89,12 +89,12 @@
 
                     @if (Request.IsAuthenticated)
                     {
-                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar" }))
                         {
                             @Html.AntiForgeryToken()
 
                             <li>
-                                @Html.ActionLink("Hi, " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                @Html.ActionLink("Hi, " + User.Identity.GetUserName().ToString().Split('@')[0] + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                             </li>
                             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                         }
