@@ -21,10 +21,7 @@ namespace BookStore.Controllers
 
             var stationeries = db.Stationeries.Include(s => s.Category).OrderByDescending(s => s.Id);
             return View(stationeries.ToList());
-            /*
-            var stationeries = db.Stationeries.OrderByDescending(s => s.Id);
-            return View(stationeries.ToList());
-            */
+          
         }
         public ActionResult About()
         {
