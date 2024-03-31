@@ -1,0 +1,86 @@
+﻿@model IEnumerable<BookStore.Models.Stationery>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_NoHero.cshtml";
+}
+
+<div class="breadcrumbs">
+    <div class="container">
+        <h2>Tìm kiếm</h2>
+    </div>
+</div><!-- End Breadcrumbs -->
+<!-- ======= Courses Section ======= -->
+<section id="courses" class="courses">
+    <div class="container" data-aos="fade-up">
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-12">
+                <table class="table display table-responsive" id="books">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Category.CategoryName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Brief)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Img)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Quantity)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Price)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.Raw(@item.Brief)
+                                    @*@Html.DisplayFor(modelItem => item.Brief)*@
+                                </td>
+                                <td>
+                                    <img src="@item.Img" class="img-thumbnail" style="width:100px;height:100px;"/>
+                                    @*@Html.DisplayFor(modelItem => item.Img)*@
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#books').DataTable({ autoWidth: false });
+        });
+    </script>
+}
