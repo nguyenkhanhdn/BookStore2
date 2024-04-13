@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "YourCart";
+    Layout = "~/Views/Shared/_NoHero.cshtml";
+}
+
+<div class="breadcrumbs">
+    <div class="container">
+        <h2>Giỏ hàng</h2>
+    </div>
+</div><!-- End Breadcrumbs -->
+<!-- ======= Courses Section ======= -->
+<section id="courses" class="courses">
+    <div class="container" data-aos="fade-up">
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-12">
+
+                <h2>Giỏ hàng của bạn</h2>
+                @{ var cart = Session["cart"] as BookStore.Controllers.ShoppingCart;}
+                <table class="table display table-bordered table-responsive" id="shoppingcart">
+                    <thead>
+                        <tr>
+                            <td>Mã hàng</td>
+                            <td>Tên hàng</td>
+                            <td>Số lượng</td>
+                            <td>Giá</td>
+                            <td>Thành tiền</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (cart != null)
+                        {
+                            for (int i = 0; i < cart.CartItems.Rows.Count; i++)
+                            {
+                                <tr>
+                                    <td>@cart.CartItems.Rows[i][0].ToString()</td>
+                                    <td>@cart.CartItems.Rows[i][1].ToString()</td>
+                                    <td>@cart.CartItems.Rows[i][2].ToString()</td>
+                                    <td>@cart.CartItems.Rows[i][3].ToString()</td>
+                                    <td>@cart.CartItems.Rows[i][4].ToString()</td>
+                                    <td>
+                                        @Html.ActionLink("Xóa", "RemoveItem", "Home",
+                                 new { @Id = cart.CartItems.Rows[i][0].ToString() },
+                                 new { @class = "btn btn-danger" })
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+                <p></p>
+                <div>
+                    @Html.ActionLink("Quay về trang chủ", "Index") | @Html.ActionLink("Quay về trang tìm sách", "Search", "Home")
+                </div>
+                <hr />
+                @Html.ActionLink("Mua hàng", "PlaceOrder", "Home", null, new { @class = "btn btn-success" })
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script>
+    $(document).ready(function () {
+            $('#shoppingcart').DataTable({ autoWidth: false });
+        });</script>
+}

@@ -14,5 +14,6 @@ namespace BookStore.Models
 
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Stationery> Stationeries { get; set; }
+        public virtual DbSet<Member> Members { get; set; }
     }
 }
