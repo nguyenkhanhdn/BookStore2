@@ -20,7 +20,6 @@ namespace BookStore.Controllers
         }
         public ActionResult Search()
         {
-
             var stationeries = db.Stationeries.Include(s => s.Category).OrderByDescending(s => s.Id);
             return View(stationeries.ToList());
           
@@ -28,14 +27,12 @@ namespace BookStore.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
