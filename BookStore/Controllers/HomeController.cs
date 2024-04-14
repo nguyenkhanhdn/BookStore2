@@ -85,9 +85,9 @@ namespace BookStore.Controllers
         }
         [Authorize()]//Những người đã đăng nhập
         [HttpPost]
-        public ActionResult PlaceOrder(string StudentId, string RegDate, string RecMethod, string address, string Phone, string note)
+        public ActionResult PlaceOrder(string name, DateTime orderedDate, string deliveryType, string address, string Phone, string note)
         {
-            Member regInfo = null;
+            Order order = null;
 
             ShoppingCart cart = (ShoppingCart)Session["cart"];
             if (cart == null) //Nếu trong giỏ chưa có cuốn sách nào -> về trang chủ
@@ -99,15 +99,14 @@ namespace BookStore.Controllers
             {
                 foreach (DataRow row in cart.CartItems.Rows)
                 {
-                    regInfo = new Member();
-                    regInfo.BookCode = Guid.NewGuid().ToString();//""GetBookCodeFromBookId(int.Parse(row[0].ToString()));
-                    regInfo.StudentId = int.Parse(StudentId);
-                    regInfo.RegDate = DateTime.Parse(RegDate);
-                    regInfo.RecMethod = RecMethod;
-                    regInfo.Address = address;
-                    regInfo.Phone = Phone;
-                    regInfo.Note = note;
-                    db.Members.Add(regInfo);
+                    order = new Order();
+                    order.Name = name;//""GetBookCodeFromBookId(int.Parse(row[0].ToString()));
+                    order.DeliveryType = deliveryType;
+                    order.OrderedDate = orderedDate;
+                    order.Address = address;
+                    order.Phone = Phone;
+                    order.Note = note;
+                    db.Orders.Add(order);
                 }
                 db.SaveChanges();
             }

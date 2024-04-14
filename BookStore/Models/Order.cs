@@ -6,22 +6,19 @@ using System.Web;
 
 namespace BookStore.Models
 {
-    public partial class Member
+    public partial class Order
     {
         public int Id { get; set; }
-        [Display(Name = "Học sinh")]
-        [Required(ErrorMessage = "Học sinh không được để trống.")]
-        public int StudentId { get; set; }
-        [Display(Name = "Sách")]
-        [Required(ErrorMessage = "Sách không được để trống.")]
-        public string BookCode { get; set; }
-        [Display(Name = "Ngày mượn")]
+        [Display(Name = "Người mua hàng")]
+        [Required(ErrorMessage = "Người mua hàng không được để trống.")]
+        public string Name { get; set; }
+        [Display(Name = "Ngày đặt mua")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public Nullable<System.DateTime> RegDate { get; set; }
-        [Display(Name = "Hình thức nhận sách")]
-        public string RecMethod { get; set; }
-        [Display(Name = "Địa chỉ")]
+        public Nullable<System.DateTime> OrderedDate { get; set; }
+        [Display(Name = "Phương thức giao hàng")]
+        public string DeliveryType { get; set; }
+        [Display(Name = "Địa chỉ nhận hàng")]
         public string Address { get; set; }
         [Display(Name = "Điện thoại")]
         public string Phone { get; set; }
