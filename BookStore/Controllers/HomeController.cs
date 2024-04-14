@@ -97,16 +97,25 @@ namespace BookStore.Controllers
             }
             else
             {
+                order = new Order();
+                order.Name = name;//""GetBookCodeFromBookId(int.Parse(row[0].ToString()));
+                order.DeliveryType = deliveryType;
+                order.OrderedDate = orderedDate;
+                order.Address = address;
+                order.Phone = Phone;
+                order.Note = note;
+                db.Orders.Add(order);
+                db.SaveChanges();
+                int orderId = order.Id;
+
                 foreach (DataRow row in cart.CartItems.Rows)
                 {
-                    order = new Order();
-                    order.Name = name;//""GetBookCodeFromBookId(int.Parse(row[0].ToString()));
-                    order.DeliveryType = deliveryType;
-                    order.OrderedDate = orderedDate;
-                    order.Address = address;
-                    order.Phone = Phone;
-                    order.Note = note;
-                    db.Orders.Add(order);
+                    var orderItem = new OrderItem();
+                    orderItem.OrderId = orderId;
+                    orderItem.StationeryId = int.Parse(row[0].ToString());
+                    orderItem.Quantity = int.Parse(row[2].ToString());
+                    orderItem.Price = float.Parse(row[3].ToString());
+                    db.OrderItems.Add(orderItem);
                 }
                 db.SaveChanges();
             }

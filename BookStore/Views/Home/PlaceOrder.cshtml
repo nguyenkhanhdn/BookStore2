@@ -1,5 +1,5 @@
 ﻿
-@model BookStore.Models.Member
+@model BookStore.Models.Order
 
 @{
     ViewBag.Title = "Mua hàng";
@@ -24,49 +24,35 @@
                     <div class="form-horizontal">
                         <hr />
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                         <div class="form-group">
-                            @*@Html.LabelFor(model => model.StudentId, "StudentId", htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            <label class="control-label col-md-2">Học sinh</label>
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @*@Html.DropDownList("MemberID", null, htmlAttributes: new { @class = "form-control" })*@
-                                <input name="StudentId" type="hidden" value="@ViewBag.StudentId" class="form-control" readonly />
-                                <input name="Fullname" type="text" value="@ViewBag.FullName" class="form-control" readonly />
-                                @Html.ValidationMessageFor(model => model.StudentId, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-                        @*<div class="form-group">
-                                @Html.LabelFor(model => model.BookCode, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.BookCode, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.BookCode, "", new { @class = "text-danger" })
-                                </div>
-                            </div>*@
-
                         <div class="form-group">
-                            @Html.LabelFor(model => model.RegDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.OrderedDate, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.RegDate, new { htmlAttributes = new { @class = "form-control" } })
-
-                                @*<input type="date" value="" name="RegDate" id="RegDate" class="control-label" />*@
-                                @Html.ValidationMessageFor(model => model.RegDate, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.OrderedDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.OrderedDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
-                            @Html.LabelFor(model => model.RecMethod, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.DeliveryType, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @*@Html.EditorFor(model => model.RecMethod, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @*@Html.EditorFor(model => model.DeliveryType, new { htmlAttributes = new { @class = "form-control" } })*@
 
-                                <input list="RecMethodList" name="RecMethod" id="RecMethod" class="form-control" />
-                                <datalist id="RecMethodList">
+                                <input list="DeliveryTypeList" name="DeliveryType" id="DeliveryType" class="form-control" />
+                                <datalist id="DeliveryTypeList">
                                     <option value="Nhận sách tại nhà" />
                                     <option value="Nhận sách tại thư viện" />
                                 </datalist>
-                                @Html.ValidationMessageFor(model => model.RecMethod, "", new { @class = "text-danger" })
+
+                                @Html.ValidationMessageFor(model => model.DeliveryType, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -74,7 +60,6 @@
                                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -82,7 +67,6 @@
                                 @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -104,15 +88,16 @@
                         <div class="form-group">
                             <div class="col-md-1"></div>
                             <div class="col-md-9">
-                                <h4>Giỏ sách cần mượn</h4>
+                                <h4>Giỏ hàng</h4>
                                 @{ var cart = Session["cart"] as BookStore.Controllers.ShoppingCart;}
                                 <table class="table table-bordered">
                                     <tr>
-                                        <th>TT</th>
-                                        <th>Mã sách</th>
+                                        <th>#</th>
+                                        <th>Mã đồ dùng</th>
                                         <th>Tên sách</th>
                                         <th>Số lượng</th>
-
+                                        <th>Đơn giá</th>
+                                        <th>Thành tiền</th>
                                     </tr>
                                     @if (cart != null)
                                     {
@@ -124,12 +109,14 @@
                                                 <td>@cart.CartItems.Rows[i][0].ToString()</td>
                                                 <td>@cart.CartItems.Rows[i][1].ToString()</td>
                                                 <td>@cart.CartItems.Rows[i][2].ToString()</td>
+                                                <td>@cart.CartItems.Rows[i][3].ToString()</td>
+                                                <td>@cart.CartItems.Rows[i][4].ToString()</td>
 
                                             </tr>
                                         }
                                     }
                                 </table>
-                                <span class="info" style="font-weight:bold;">
+                                <span class="info" style="font-weight:bold;margin:10px;">
                                     Tổng số sách:
                                     @if (cart == null)
                                     {
@@ -144,14 +131,15 @@
                             </div>
                             <div class="col-md-2"></div>
                         </div>
+                        <p></p>
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Đăng ký" class="btn btn-success" />
+                                <input type="submit" value="Đặt mua" class="btn btn-success" />
                             </div>
                         </div>
                     </div>
                 }
-
+                <p></p>
                 <div>
                     @Html.ActionLink("Trở về", "Index")
                 </div>
@@ -159,7 +147,7 @@
                 @section scripts{
                     <script>
                         $(document).ready(function () {
-                            document.getElementById("RegDate").valueAsDate = new Date();
+                            document.getElementById("OrderedDate").valueAsDate = new Date();
                         });
                     </script>
                 }
@@ -169,8 +157,8 @@
 </section>
 
 @*@section scripts{
-    <script>
-        $(document).ready(function () {
-            $('#shoppingcart').DataTable({ autoWidth: false });
-        });</script>
-}*@
+        <script>
+            $(document).ready(function () {
+                $('#shoppingcart').DataTable({ autoWidth: false });
+            });</script>
+    }*@

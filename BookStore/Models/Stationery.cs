@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookStore.Models
 {
@@ -24,6 +25,7 @@ namespace BookStore.Models
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
-        //public ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
+
     }
 }

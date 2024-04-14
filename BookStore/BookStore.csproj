@@ -217,6 +217,10 @@
     <Compile Include="Migrations\202404140316039_add-new-table-order-3.Designer.cs">
       <DependentUpon>202404140316039_add-new-table-order-3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202404140417266_add-new-table-order-4.cs" />
+    <Compile Include="Migrations\202404140417266_add-new-table-order-4.Designer.cs">
+      <DependentUpon>202404140417266_add-new-table-order-4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BookStoreContext.cs" />
@@ -224,6 +228,7 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\PDF.cs" />
     <Compile Include="Models\Stationery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1706,6 +1711,7 @@
     <Content Include="Views\PDFs\Details.cshtml" />
     <Content Include="Views\PDFs\Edit.cshtml" />
     <Content Include="Views\PDFs\Index.cshtml" />
+    <Content Include="Views\Home\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1758,6 +1764,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202404140316039_add-new-table-order-3.resx">
       <DependentUpon>202404140316039_add-new-table-order-3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404140417266_add-new-table-order-4.resx">
+      <DependentUpon>202404140417266_add-new-table-order-4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

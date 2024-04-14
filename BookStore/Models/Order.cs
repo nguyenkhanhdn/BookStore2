@@ -27,5 +27,7 @@ namespace BookStore.Models
         [Display(Name = "Trạng thái")]
         public bool Status { get; set; }
 
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
+
     }
 }
