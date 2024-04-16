@@ -10,6 +10,7 @@ using BookStore.Models;
 
 namespace BookStore.Controllers
 {
+    [Authorize]
     public class PDFsController : Controller
     {
         private BookStoreContext db = new BookStoreContext();
@@ -38,6 +39,16 @@ namespace BookStore.Controllers
         // GET: PDFs/Create
         public ActionResult Create()
         {
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            items.Add(new SelectListItem { Text = "Lớp 6", Value = "6", Selected = true });
+
+            items.Add(new SelectListItem { Text = "Lớp 7", Value = "7" });
+
+            items.Add(new SelectListItem { Text = "Lớp 8", Value = "8"});
+
+            ViewBag.Classes = items;
+
             return View();
         }
 
@@ -46,7 +57,7 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Publisher,Area,FileUrl,UploadedDate,Description")] PDF pDF)
+        public ActionResult Create([Bind(Include = "Id,ClassId,Title,Publisher,Area,FileUrl,UploadedDate,Description")] PDF pDF)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +89,7 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Publisher,Area,FileUrl,UploadedDate,Description")] PDF pDF)
+        public ActionResult Edit([Bind(Include = "Id,ClassId,Title,Publisher,Area,FileUrl,UploadedDate,Description")] PDF pDF)
         {
             if (ModelState.IsValid)
             {

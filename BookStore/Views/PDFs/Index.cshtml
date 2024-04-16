@@ -50,7 +50,8 @@
                     @Html.DisplayFor(modelItem => item.Area)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FileUrl)
+                    <a href="@item.FileUrl" target="_blank">Xem sách</a>
+                    @*@Html.DisplayFor(modelItem => item.FileUrl)*@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.UploadedDate)

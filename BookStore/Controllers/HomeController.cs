@@ -18,6 +18,18 @@ namespace BookStore.Controllers
             var stationeries = db.Stationeries.OrderByDescending(s => s.Id).Take(3);
             return View(stationeries.ToList());
         }
+        public ActionResult StationerybyCategoryId(int catId)
+        {
+            var stationeries = db.Stationeries.Where(s => s.CategoryId == catId).OrderByDescending(s => s.Id);
+            return View("Index", stationeries.ToList());
+        }
+        [Authorize]
+        public ActionResult PdfViewers(int classId)
+        {
+            return View(db.PDFs.Where(p=>p.ClassId==classId).ToList());
+        }
+
+
         public ActionResult Search()
         {
             var stationeries = db.Stationeries.Include(s => s.Category).OrderByDescending(s => s.Id);

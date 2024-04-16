@@ -42,18 +42,23 @@
                 <ul>
                     <li><a class="active" href="~/Home">Trang Chủ</a></li>
                     <li class="dropdown">
-                        <a href="#"><span>Sách Giáo Khoa & Sách Bài Tập</span> <i class="bi bi-chevron-down"></i></a>
+                        <a href="~/Stationeries/StationeryByCategoryId?categoryId=1"><span>Sách Giáo khoa</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                             <li class="dropdown">
                                 <a href="#"><span>Kết Nối Tri Thức</span> <i class="bi bi-chevron-right"></i></a>
                                 <ul>
-                                    <li><a href="#">Lớp 6</a></li>
-                                    <li><a href="#">Lớp 7</a></li>
-                                    <li><a href="#">Lớp 8</a></li>
+                                    <li><a href="~/Home/StationerybyCategoryId?catId=1">Lớp 6</a></li>
+                                    <li><a href="~/Home/StationerybyCategoryId?catId=2">Lớp 7</a></li>
+                                    <li><a href="~/Home/StationerybyCategoryId?catId=3">Lớp 8</a></li>
                                 </ul>
                             </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="~/Stationeries/StationeryByCategoryId?categoryId=1"><span>Sách Bài Tập</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
                             <li class="dropdown">
-                                <a href="#"><span>Chân Trời Sáng Tạo</span> <i class="bi bi-chevron-right"></i></a>
+                                <a href="#"><span>Kết Nối Tri Thức</span> <i class="bi bi-chevron-right"></i></a>
                                 <ul>
                                     <li><a href="#">Lớp 6</a></li>
                                     <li><a href="#">Lớp 7</a></li>
@@ -68,31 +73,19 @@
                             <li class="dropdown">
                                 <a href="#"><span>Kết Nối Tri Thức</span> <i class="bi bi-chevron-right"></i></a>
                                 <ul>
-                                    <li><a href="#">Lớp 6</a></li>
-                                    <li><a href="#">Lớp 7</a></li>
-                                    <li><a href="#">Lớp 8</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#"><span>Chân Trời Sáng Tạo</span> <i class="bi bi-chevron-right"></i></a>
-                                <ul>
-                                    <li><a href="#">Lớp 6</a></li>
-                                    <li><a href="#">Lớp 7</a></li>
-                                    <li><a href="#">Lớp 8</a></li>
+                                    <li><a href="~/home/PdfViewers?classid=6">Lớp 6</a></li>
+                                    <li><a href="~/home/PdfViewers?classid=7">Lớp 7</a></li>
+                                    <li><a href="~/home/PdfViewers?classid=8">Lớp 8</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
                     <li><a class="" href="#">Dụng Cụ Học Tập</a></li>
-
-                    <li><a class="" href="~/Home/search">Tìm sách</a></li>
-
                     @if (Request.IsAuthenticated)
                     {
                         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar" }))
                         {
                             @Html.AntiForgeryToken()
-
                             <li>
                                 @Html.ActionLink("Hi, " + User.Identity.GetUserName().ToString().Split('@')[0] + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                             </li>
@@ -105,10 +98,8 @@
                         <li>@Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                     }
                 </ul>
-
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
-
         </div>
     </header><!-- End Header -->
 

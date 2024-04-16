@@ -8,7 +8,13 @@ namespace BookStore.Models
 {
     public class PDF
     {
+        [Key]
         public int Id { get; set; }
+
+        [Display(Name = "Lớp")]
+        [Required(ErrorMessage = "Lớp yêu cầu phải nhập")]
+        public int ClassId { get; set; }
+
         [Display(Name = "Tựa sách")]
         [Required(ErrorMessage = "Yêu cầu phải nhập")]
         public string Title { get; set; }
