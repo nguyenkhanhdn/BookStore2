@@ -12,6 +12,15 @@ namespace BookStore.Models
         //[Required(ErrorMessage = "Không được để trống mô tả.")]
         [Display(Name = "Mô tả")]
         public string Brief { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống trường nhà xuất bản.")]
+        [Display(Name = "Nhà xuất bản/nhà sản xuất")]
+        public string Publisher { get; set; }
+
+        //[Required(ErrorMessage = "Không được để trống mô tả.")]
+        [Display(Name = "Dùng cho trường")]
+        public string UsedFor { get; set; }
+
         [Required(ErrorMessage = "Không được để trống ảnh đại diện.")]
         [Display(Name = "Ảnh đại diện")]
         public string Img { get; set; }

@@ -175,6 +175,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\OrderStatusController.cs" />
     <Compile Include="Controllers\PDFsController.cs" />
     <Compile Include="Controllers\ShoppingCart.cs" />
     <Compile Include="Controllers\StationeriesController.cs" />
@@ -229,6 +230,14 @@
     <Compile Include="Migrations\202404161256306_lop1.Designer.cs">
       <DependentUpon>202404161256306_lop1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202404210308132_order-status.cs" />
+    <Compile Include="Migrations\202404210308132_order-status.Designer.cs">
+      <DependentUpon>202404210308132_order-status.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404210309359_order-status2.cs" />
+    <Compile Include="Migrations\202404210309359_order-status2.Designer.cs">
+      <DependentUpon>202404210309359_order-status2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BookStoreContext.cs" />
@@ -238,6 +247,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\OrderStatus.cs" />
     <Compile Include="Models\PDF.cs" />
     <Compile Include="Models\Stationery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1722,6 +1732,11 @@
     <Content Include="Views\PDFs\Index.cshtml" />
     <Content Include="Views\Home\Success.cshtml" />
     <Content Include="Views\Home\PdfViewers.cshtml" />
+    <Content Include="Views\OrderStatus\Create.cshtml" />
+    <Content Include="Views\OrderStatus\Delete.cshtml" />
+    <Content Include="Views\OrderStatus\Details.cshtml" />
+    <Content Include="Views\OrderStatus\Edit.cshtml" />
+    <Content Include="Views\OrderStatus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1783,6 +1798,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202404161256306_lop1.resx">
       <DependentUpon>202404161256306_lop1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404210308132_order-status.resx">
+      <DependentUpon>202404210308132_order-status.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404210309359_order-status2.resx">
+      <DependentUpon>202404210309359_order-status2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

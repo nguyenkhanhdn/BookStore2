@@ -1,0 +1,66 @@
+﻿@model IEnumerable<BookStore.Models.OrderStatus>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@section header{
+    Xử lý đơn hàng
+}
+<p>
+    @Html.ActionLink("Xử lý đơn", "Create")
+</p>
+<table class="display table-bordered table-responsive" id="orderStatus">
+    <thead>
+        <tr>
+            <th>
+                Số hóa đơn
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProcessedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProcessedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            $('#orderStatus').DataTable({ autoWidth: false });
+        });
+
+    </script>
+}

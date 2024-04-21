@@ -37,11 +37,26 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Publisher)
+        </dt>
+
+        <dd>
+            
+            @Html.DisplayFor(model => model.Publisher)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UsedFor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsedFor)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Img)
         </dt>
 
         <dd>
-            <img class="img-thumbnail" src="@Model.Img"  style="width:300px;height:auto;"/>
+            <img class="img-thumbnail" src="@Model.Img" style="width:300px;height:auto;" />
             @*@Html.DisplayFor(model => model.Img)*@
         </dd>
 

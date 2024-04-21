@@ -10,120 +10,122 @@ using BookStore.Models;
 
 namespace BookStore.Controllers
 {
-    public class StationeriesController : Controller
+    public class OrderStatusController : Controller
     {
         private BookStoreContext db = new BookStoreContext();
 
-        // GET: Stationeries
+        // GET: OrderStatus
         public ActionResult Index()
         {
-            var stationeries = db.Stationeries.Include(s => s.Category).OrderByDescending(s=>s.Id);
-            return View(stationeries.ToList());
-        }
-        [HttpGet]
-        public ActionResult StationeryByCategoryId(int categoryId = 1)
-        {
-            var stationeries = db.Stationeries.Include(s => s.Category).OrderByDescending(s => s.Id).Where(s=>s.CategoryId==categoryId);
-            return View("index",stationeries.ToList());
+            var orderStatus = db.OrderStatus.Include(o => o.Order);
+            return View(orderStatus.ToList());
         }
 
-        // GET: Stationeries/Details/5
+        // GET: OrderStatus/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stationery stationery = db.Stationeries.Find(id);
-            if (stationery == null)
+            OrderStatus orderStatus = db.OrderStatus.Find(id);
+            if (orderStatus == null)
             {
                 return HttpNotFound();
             }
-            return View(stationery);
+            return View(orderStatus);
         }
 
-        // GET: Stationeries/Create
+        // GET: OrderStatus/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "CategoryName");
+            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id");
+
+            List<SelectListItem> statuses = new List<SelectListItem>()
+            {
+                new SelectListItem() {Text="Chờ xác nhận", Value="Chờ xác nhận"},
+                new SelectListItem() { Text="Đang giao", Value="Đang giao"},
+                new SelectListItem() { Text="Đã giao", Value="Đã giao"},
+                new SelectListItem() { Text="Đã hủy", Value="Đã hủy"},
+                new SelectListItem() { Text="Trả hàng", Value="Trả hàng"}
+            };
+            ViewBag.Status = statuses;
             return View();
         }
 
-        // POST: Stationeries/Create
+        // POST: OrderStatus/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "Id,Name,Brief,Publisher,UsedFor,Img,Quantity,Price,CategoryId")] Stationery stationery)
+        public ActionResult Create([Bind(Include = "Id,OrderId,ProcessedDate,Status,Note")] OrderStatus orderStatus)
         {
             if (ModelState.IsValid)
             {
-                db.Stationeries.Add(stationery);
+                db.OrderStatus.Add(orderStatus);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "CategoryName", stationery.CategoryId);
-            return View(stationery);
+            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Name", orderStatus.OrderId);
+            return View(orderStatus);
         }
 
-        // GET: Stationeries/Edit/5
+        // GET: OrderStatus/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stationery stationery = db.Stationeries.Find(id);
-            if (stationery == null)
+            OrderStatus orderStatus = db.OrderStatus.Find(id);
+            if (orderStatus == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "CategoryName", stationery.CategoryId);
-            return View(stationery);
+            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Name", orderStatus.OrderId);
+            return View(orderStatus);
         }
 
-        // POST: Stationeries/Edit/5
+        // POST: OrderStatus/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "Id,Name,Brief,Publisher,UsedFor,Img,Quantity,Price,CategoryId")] Stationery stationery)
+        public ActionResult Edit([Bind(Include = "Id,OrderId,ProcessedDate,Status,Note")] OrderStatus orderStatus)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(stationery).State = EntityState.Modified;
+                db.Entry(orderStatus).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "CategoryName", stationery.CategoryId);
-            return View(stationery);
+            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Name", orderStatus.OrderId);
+            return View(orderStatus);
         }
 
-        // GET: Stationeries/Delete/5
+        // GET: OrderStatus/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stationery stationery = db.Stationeries.Find(id);
-            if (stationery == null)
+            OrderStatus orderStatus = db.OrderStatus.Find(id);
+            if (orderStatus == null)
             {
                 return HttpNotFound();
             }
-            return View(stationery);
+            return View(orderStatus);
         }
 
-        // POST: Stationeries/Delete/5
+        // POST: OrderStatus/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Stationery stationery = db.Stationeries.Find(id);
-            db.Stationeries.Remove(stationery);
+            OrderStatus orderStatus = db.OrderStatus.Find(id);
+            db.OrderStatus.Remove(orderStatus);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

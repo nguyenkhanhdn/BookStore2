@@ -28,6 +28,7 @@ namespace BookStore.Models
         public bool Status { get; set; }
 
         public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual ICollection<OrderStatus> OrderStatuses { get; set; }
 
     }
 }

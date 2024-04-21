@@ -17,5 +17,7 @@ namespace BookStore.Models
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<PDF> PDFs { get; set; }
+
+        public System.Data.Entity.DbSet<BookStore.Models.OrderStatus> OrderStatus { get; set; }
     }
 }
