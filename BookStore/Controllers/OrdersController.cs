@@ -17,7 +17,8 @@ namespace BookStore.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            return View(db.Orders.ToList());
+            var orders = db.Orders.ToList();
+            return View(orders);
         }
 
         // GET: Orders/Details/5
@@ -34,8 +35,30 @@ namespace BookStore.Controllers
             }
             return View(order);
         }
-
-        // GET: Orders/Create
+        // GET: Orders/ProcessOrder
+        public ActionResult ProcessOrder(int? orderId)
+        {
+            if (orderId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ViewBag.OrderId = orderId;
+            ViewBag.StatusId = new SelectList(db.Statuses, "Id", "Name");
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProcessOrder([Bind(Include = "OrderId,ProcessedDate,Note,StatusId")] OrderStatus orderStatus)
+        {
+            if (ModelState.IsValid)
+            {
+                db.OrderStatus.Add(orderStatus);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(orderStatus);
+        }
+            // GET: Orders/Create
         public ActionResult Create()
         {
             return View();

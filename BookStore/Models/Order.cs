@@ -25,8 +25,6 @@ namespace BookStore.Models
         [Display(Name = "Ghi chú")]
         public string Note { get; set; }
         [Display(Name = "Trạng thái")]
-        public bool Status { get; set; }
-
         public virtual ICollection<OrderItem> OrderItems { get; set; }
         public virtual ICollection<OrderStatus> OrderStatuses { get; set; }
 

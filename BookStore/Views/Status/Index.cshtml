@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BookStore.Models.Status>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header{
+    Quản lý trạng thái
+}
+<p>
+    @Html.ActionLink("Thêm mới", "Create")
+</p>
+<table class="display table-bordered table-responsive" id="status">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#status').DataTable({ autoWidth: false });
+        });</script>
+}

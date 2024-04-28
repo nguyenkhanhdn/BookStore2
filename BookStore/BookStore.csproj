@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -48,10 +49,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -179,64 +180,13 @@
     <Compile Include="Controllers\PDFsController.cs" />
     <Compile Include="Controllers\ShoppingCart.cs" />
     <Compile Include="Controllers\StationeriesController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202403281529263_mot.cs" />
-    <Compile Include="Migrations\202403281529263_mot.Designer.cs">
-      <DependentUpon>202403281529263_mot.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202403281535461_hai.cs" />
-    <Compile Include="Migrations\202403281535461_hai.Designer.cs">
-      <DependentUpon>202403281535461_hai.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202403290319572_nam.cs" />
-    <Compile Include="Migrations\202403290319572_nam.Designer.cs">
-      <DependentUpon>202403290319572_nam.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202403290339013_brief.cs" />
-    <Compile Include="Migrations\202403290339013_brief.Designer.cs">
-      <DependentUpon>202403290339013_brief.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202403290347411_brief1.cs" />
-    <Compile Include="Migrations\202403290347411_brief1.Designer.cs">
-      <DependentUpon>202403290347411_brief1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202403300744551_display.cs" />
-    <Compile Include="Migrations\202403300744551_display.Designer.cs">
-      <DependentUpon>202403300744551_display.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202404130809453_aa.cs" />
-    <Compile Include="Migrations\202404130809453_aa.Designer.cs">
-      <DependentUpon>202404130809453_aa.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202404140304340_add-new-table-order.cs" />
-    <Compile Include="Migrations\202404140304340_add-new-table-order.Designer.cs">
-      <DependentUpon>202404140304340_add-new-table-order.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202404140316039_add-new-table-order-3.cs" />
-    <Compile Include="Migrations\202404140316039_add-new-table-order-3.Designer.cs">
-      <DependentUpon>202404140316039_add-new-table-order-3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202404140417266_add-new-table-order-4.cs" />
-    <Compile Include="Migrations\202404140417266_add-new-table-order-4.Designer.cs">
-      <DependentUpon>202404140417266_add-new-table-order-4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202404161142400_lop.cs" />
-    <Compile Include="Migrations\202404161142400_lop.Designer.cs">
-      <DependentUpon>202404161142400_lop.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202404161256306_lop1.cs" />
-    <Compile Include="Migrations\202404161256306_lop1.Designer.cs">
-      <DependentUpon>202404161256306_lop1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202404210308132_order-status.cs" />
-    <Compile Include="Migrations\202404210308132_order-status.Designer.cs">
-      <DependentUpon>202404210308132_order-status.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202404210309359_order-status2.cs" />
-    <Compile Include="Migrations\202404210309359_order-status2.Designer.cs">
-      <DependentUpon>202404210309359_order-status2.cs</DependentUpon>
+    <Compile Include="Migrations\202404280313013_ss.cs" />
+    <Compile Include="Migrations\202404280313013_ss.Designer.cs">
+      <DependentUpon>202404280313013_ss.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -250,6 +200,7 @@
     <Compile Include="Models\OrderStatus.cs" />
     <Compile Include="Models\PDF.cs" />
     <Compile Include="Models\Stationery.cs" />
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -1737,6 +1688,12 @@
     <Content Include="Views\OrderStatus\Details.cshtml" />
     <Content Include="Views\OrderStatus\Edit.cshtml" />
     <Content Include="Views\OrderStatus\Index.cshtml" />
+    <Content Include="Views\Status\Create.cshtml" />
+    <Content Include="Views\Status\Delete.cshtml" />
+    <Content Include="Views\Status\Details.cshtml" />
+    <Content Include="Views\Status\Edit.cshtml" />
+    <Content Include="Views\Status\Index.cshtml" />
+    <Content Include="Views\Orders\ProcessOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1763,47 +1720,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202403281529263_mot.resx">
-      <DependentUpon>202403281529263_mot.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202403281535461_hai.resx">
-      <DependentUpon>202403281535461_hai.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202403290319572_nam.resx">
-      <DependentUpon>202403290319572_nam.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202403290339013_brief.resx">
-      <DependentUpon>202403290339013_brief.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202403290347411_brief1.resx">
-      <DependentUpon>202403290347411_brief1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202403300744551_display.resx">
-      <DependentUpon>202403300744551_display.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202404130809453_aa.resx">
-      <DependentUpon>202404130809453_aa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202404140304340_add-new-table-order.resx">
-      <DependentUpon>202404140304340_add-new-table-order.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202404140316039_add-new-table-order-3.resx">
-      <DependentUpon>202404140316039_add-new-table-order-3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202404140417266_add-new-table-order-4.resx">
-      <DependentUpon>202404140417266_add-new-table-order-4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202404161142400_lop.resx">
-      <DependentUpon>202404161142400_lop.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202404161256306_lop1.resx">
-      <DependentUpon>202404161256306_lop1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202404210308132_order-status.resx">
-      <DependentUpon>202404210308132_order-status.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202404210309359_order-status2.resx">
-      <DependentUpon>202404210309359_order-status2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202404280313013_ss.resx">
+      <DependentUpon>202404280313013_ss.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -1840,7 +1758,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

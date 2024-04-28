@@ -18,6 +18,8 @@ namespace BookStore.Models
         public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<PDF> PDFs { get; set; }
 
-        public System.Data.Entity.DbSet<BookStore.Models.OrderStatus> OrderStatus { get; set; }
+        public virtual DbSet<Status> Statuses { get; set; }
+
+        public virtual DbSet<OrderStatus> OrderStatus { get; set; }
     }
 }

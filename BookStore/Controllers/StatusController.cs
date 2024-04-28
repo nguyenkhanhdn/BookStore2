@@ -10,116 +10,107 @@ using BookStore.Models;
 
 namespace BookStore.Controllers
 {
-    public class OrderStatusController : Controller
+    public class StatusController : Controller
     {
         private BookStoreContext db = new BookStoreContext();
 
-        // GET: OrderStatus
+        // GET: Status
         public ActionResult Index()
         {
-            var orderStatus = db.OrderStatus.Include(o => o.Order).Include(o => o.Status);
-            return View(orderStatus.ToList());
+            return View(db.Statuses.ToList());
         }
 
-        // GET: OrderStatus/Details/5
+        // GET: Status/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderStatus orderStatus = db.OrderStatus.Find(id);
-            if (orderStatus == null)
+            Status status = db.Statuses.Find(id);
+            if (status == null)
             {
                 return HttpNotFound();
             }
-            return View(orderStatus);
+            return View(status);
         }
 
-        // GET: OrderStatus/Create
+        // GET: Status/Create
         public ActionResult Create()
         {
-            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id");
-            ViewBag.StatusId = new SelectList(db.Statuses, "Id", "Name");
             return View();
         }
 
-        // POST: OrderStatus/Create
+        // POST: Status/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ProcessedDate,StatusId,Note,OrderId")] OrderStatus orderStatus)
+        public ActionResult Create([Bind(Include = "Id,Name")] Status status)
         {
             if (ModelState.IsValid)
             {
-                db.OrderStatus.Add(orderStatus);
+                db.Statuses.Add(status);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id", orderStatus.OrderId);
-            ViewBag.StatusId = new SelectList(db.Statuses, "Id", "Name", orderStatus.StatusId);
-            return View(orderStatus);
+            return View(status);
         }
 
-        // GET: OrderStatus/Edit/5
+        // GET: Status/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderStatus orderStatus = db.OrderStatus.Find(id);
-            if (orderStatus == null)
+            Status status = db.Statuses.Find(id);
+            if (status == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id", orderStatus.OrderId);
-            ViewBag.StatusId = new SelectList(db.Statuses, "Id", "Name", orderStatus.StatusId);
-            return View(orderStatus);
+            return View(status);
         }
 
-        // POST: OrderStatus/Edit/5
+        // POST: Status/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ProcessedDate,StatusId,Note,OrderId")] OrderStatus orderStatus)
+        public ActionResult Edit([Bind(Include = "Id,Name")] Status status)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(orderStatus).State = EntityState.Modified;
+                db.Entry(status).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id", orderStatus.OrderId);
-            ViewBag.StatusId = new SelectList(db.Statuses, "Id", "Name", orderStatus.StatusId);
-            return View(orderStatus);
+            return View(status);
         }
 
-        // GET: OrderStatus/Delete/5
+        // GET: Status/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderStatus orderStatus = db.OrderStatus.Find(id);
-            if (orderStatus == null)
+            Status status = db.Statuses.Find(id);
+            if (status == null)
             {
                 return HttpNotFound();
             }
-            return View(orderStatus);
+            return View(status);
         }
 
-        // POST: OrderStatus/Delete/5
+        // POST: Status/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            OrderStatus orderStatus = db.OrderStatus.Find(id);
-            db.OrderStatus.Remove(orderStatus);
+            Status status = db.Statuses.Find(id);
+            db.Statuses.Remove(status);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
