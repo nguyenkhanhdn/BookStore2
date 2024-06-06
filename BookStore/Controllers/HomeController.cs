@@ -7,6 +7,8 @@ using System.Web.Mvc;
 
 using System.Data.Entity;
 using System.Data;
+using System.Net;
+//using Microsoft.Owin;
 
 namespace BookStore.Controllers
 {
@@ -48,14 +50,31 @@ namespace BookStore.Controllers
             return View();
         }
 
-        public ActionResult AddToCart(int id, int quantity = 1)
+        public ActionResult Details(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Stationery stationery = db.Stationeries.Find(id);
+            if (stationery == null)
+            {
+                return HttpNotFound();
+            }
+            return View(stationery);
+        }
+        [HttpPost]
+        public ActionResult AddToCart(FormCollection forms)
+        {
+            int id = int.Parse(forms["id"]);
+            int price = int.Parse(forms["price"]);
+            int quantity = int.Parse(forms["quantity"]);
             ShoppingCart cart = (ShoppingCart)Session["cart"];
             if (cart == null)
             {
                 cart = new ShoppingCart();
             }
-            cart.AddItem(id.ToString(), quantity, 300);
+            cart.AddItem(id.ToString(), quantity, price);
             //Save cart
             Session["cart"] = cart;
             return RedirectToAction("YourCart");

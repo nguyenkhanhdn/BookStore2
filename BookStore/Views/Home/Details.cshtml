@@ -1,0 +1,82 @@
+﻿@model BookStore.Models.Stationery
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_NoHero.cshtml";
+}
+
+<div class="breadcrumbs">
+    <div class="container">
+        <h2>Giỏ hàng</h2>
+    </div>
+</div><!-- End Breadcrumbs -->
+<!-- ======= Courses Section ======= -->
+<section id="courses" class="courses">
+    <div class="container" data-aos="fade-up">
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-4">
+                <img src="@Model.Img" class="img-responsive img-thumbnail" />
+            </div>
+            <div class="col-8">
+                <form action="addtocart" method="post">
+                    <table class="table-responsive-lg table">
+                        <tr>
+                            <td></td>
+                            <td><input type="hidden" name="id" id="id" value="@Model.Id" /></td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.Category.CategoryName)</strong></td>
+                            <td>@Html.DisplayFor(model => model.Category.CategoryName)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.Name)</strong></td>
+                            <td>@Html.DisplayFor(model => model.Name)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.Brief)</strong></td>
+                            <td>@Html.Raw(Model.Brief)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.Publisher)</strong></td>
+                            <td>@Html.DisplayFor(model => model.Publisher)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.UsedFor)</strong></td>
+                            <td>@Html.DisplayFor(model => model.UsedFor)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>@Html.DisplayNameFor(model => model.Price)</strong></td>
+                            <td>
+                                <input class="form-control" type="text" name="price" id="price" value="@Model.Price" readonly />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Số lượng</strong></td>
+                            <td><button id="giam" type="button" class="btn-outline-secondary" onclick="decrease()"> &nbsp;-&nbsp; 
+                                </button> <input type="number" id="quantity" name="quantity" value="1" style="text-align:center;outline:none;width:60px;height:30px;border:1px solid lightgray;" />
+                                <button id="tang" type="button" class="btn-outline-secondary" onclick="increase()"> + </button></td>
+                        </tr>
+                    </table>
+
+                    <input type="submit" value="Đặt hàng" class="btn btn-primary" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts{
+    <script>
+        function increase() {
+            var sl = parseInt(document.getElementById('quantity').value);
+            sl = sl + 1;
+            document.getElementById('quantity').value = sl;
+        }
+
+        function decrease() {
+            var sl = parseInt(document.getElementById('quantity').value);
+            sl = sl - 1;
+            document.getElementById('quantity').value = sl;
+        }
+
+    </script>
+}

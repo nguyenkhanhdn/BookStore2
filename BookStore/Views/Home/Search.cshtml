@@ -65,7 +65,8 @@
                                 </td>
                                 <td>
                                     @*@Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |*@
-                                    <a href="~/Home/AddToCart?id=@item.Id&p=@item.Price" class="btn btn-warning">Add to cart</a>
+                                    <span><a href="~/Home/Details?id=@item.Id" class="btn btn-warning">Chi tiết</a></span>
+                                    @*<a href="~/Home/AddToCart?id=@item.Id&p=@item.Price" class="btn btn-warning">Add to cart</a>*@
                                     @*@Html.ActionLink("Mua hàng", "addtocart", new { id = item.Id }, new { @class = "btn btn-primary" })*@
                                 </td>
                             </tr>
