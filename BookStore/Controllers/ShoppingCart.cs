@@ -93,8 +93,10 @@ namespace BookStore.Controllers
                 {
                     if (items.Rows[i]["ProductID"].Equals(proId))
                     {
-                        items.Rows[i]["Quantity"] = int.Parse(items.Rows[i]["Quantity"].ToString()) + Qty;
-                        total += (Qty * price);
+                        int newQty = int.Parse(items.Rows[i]["Quantity"].ToString()) + Qty;
+                        items.Rows[i]["Quantity"] = newQty;
+                        items.Rows[i]["Amount"] = newQty * price;
+                        total += (newQty * price);
                         break;//Thoat vong lap
                     }
                 }
