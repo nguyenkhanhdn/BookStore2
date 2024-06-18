@@ -90,6 +90,15 @@
                                 @Html.ActionLink("Hi, " + User.Identity.GetUserName().ToString().Split('@')[0] + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                             </li>
                             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                             <li class="dropdown">
+                    <a href="#"><span>🛒</span> <i class="bi bi-chevron-right"></i></a>
+                    <ul>
+                        <li><a href="~/Home/Yourcart">Giỏ hàng</a></li>
+                        <li><a href="~/Home/YourOrders">Đơn hàng</a></li>
+
+                    </ul>
+                </li>
+
                         }
                     }
                     else

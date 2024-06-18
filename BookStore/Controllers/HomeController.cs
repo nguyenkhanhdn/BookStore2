@@ -85,8 +85,16 @@ namespace BookStore.Controllers
             //return View(db.Categories.Include("Products").ToList());
             return View();
         }
-        [HttpGet]
         [Authorize]
+        public ActionResult YourOrders()
+        {
+            string userId = User.Identity.Name;
+            var orders = db.Orders.Where(o => o.UserId == userId).OrderByDescending(o => o.OrderedDate);
+            return View(orders.ToList());
+        }
+
+        [HttpGet]
+        
         public ActionResult PlaceOrder()
         {
             try
@@ -113,7 +121,7 @@ namespace BookStore.Controllers
         }
         [Authorize()]//Những người đã đăng nhập
         [HttpPost]
-        public ActionResult PlaceOrder(string name, DateTime orderedDate, string deliveryType, string address, string Phone, string note)
+        public ActionResult PlaceOrder(string name, DateTime orderedDate, string deliveryType, string address, string Phone, string note="Chờ xác nhận")
         {
             Order order = null;
 
@@ -132,6 +140,7 @@ namespace BookStore.Controllers
                 order.Address = address;
                 order.Phone = Phone;
                 order.Note = note;
+                order.UserId = User.Identity.Name;
                 db.Orders.Add(order);
                 db.SaveChanges();
                 int orderId = order.Id;

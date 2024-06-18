@@ -18,7 +18,7 @@
                 <img src="@Model.Img" class="img-responsive img-thumbnail" />
             </div>
             <div class="col-8">
-                <form action="addtocart" method="post">
+                <form action="addtocart" method="post" onsubmit="return checkQty();">
                     <table class="table-responsive-lg table">
                         <tr>
                             <td></td>
@@ -59,7 +59,16 @@
                             <td>
                                 <button id="giam" type="button" style="border:1px solid lightgray;" class="btn-outline-secondary" onclick="decrease()">
                                     &nbsp;-&nbsp;
-                                </button> <input type="number" id="quantity" name="quantity" value="1" style="text-align:center;outline:none;width:60px;height:30px;border:1px solid lightgray;" />
+                                </button>
+                                @if (Model.Quantity > 0)
+                                {
+                                    <input type="number" id="quantity" name="quantity" value="1" style="text-align:center;outline:none;width:60px;height:30px;border:1px solid lightgray;" />
+                                }
+                                else
+                                {
+                                    <input type="number" id="quantity" name="quantity" value="0" style="text-align:center;outline:none;width:60px;height:30px;border:1px solid lightgray;" />
+                                }
+
                                 <button id="tang" type="button" style="border:1px solid lightgray;" class="btn-outline-secondary" onclick="increase()"> + </button>
                             </td>
                         </tr>
@@ -89,6 +98,13 @@
             }            
             document.getElementById('quantity').value = sl;
         }
-
+        function checkQty()
+        {
+            if (document.getElementById('quantity').value <= 0) {
+                alert("Hết hàng, vui lòng chọn mặt hàng khác.");
+                return false;
+            }
+            return true;
+        }
     </script>
 }

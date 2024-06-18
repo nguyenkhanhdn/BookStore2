@@ -1,0 +1,69 @@
+﻿@model IEnumerable<BookStore.Models.Order>
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_NoHero.cshtml";
+}
+
+<div class="breadcrumbs">
+    <div class="container">
+        <h2>Đơn hàng của bạn</h2>
+    </div>
+</div><!-- End Breadcrumbs -->
+<!-- ======= Courses Section ======= -->
+<section id="courses" class="courses">
+    <div class="container" data-aos="fade-up">
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-12">
+                <table class="table table-bordered table-responsive" id="yourOrders">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OrderedDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DeliveryType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Note)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderedDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DeliveryType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Note)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#yourOrders').DataTable({ autoWidth: false });
+        });</script>
+}

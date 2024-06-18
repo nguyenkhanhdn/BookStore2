@@ -392,6 +392,7 @@ namespace BookStore.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session["cart"] = null;
             return RedirectToAction("Index", "Home");
         }
 

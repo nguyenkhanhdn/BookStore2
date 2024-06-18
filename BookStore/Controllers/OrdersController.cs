@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BookStore.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BookStore.Controllers
 {
@@ -68,9 +69,14 @@ namespace BookStore.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,OrderedDate,DeliveryType,Address,Phone,Note,Status")] Order order)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                order.UserId = User.Identity.GetUserId();
+            }
             if (ModelState.IsValid)
             {
                 db.Orders.Add(order);

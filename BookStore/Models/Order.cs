@@ -9,6 +9,11 @@ namespace BookStore.Models
     public partial class Order
     {
         public int Id { get; set; }
+
+        [Display(Name = "Mã khách hàng")]
+        [Required(ErrorMessage = "Mã khách hàng không được để trống.")]
+        public string UserId { get; set; }
+
         [Display(Name = "Người mua hàng")]
         [Required(ErrorMessage = "Người mua hàng không được để trống.")]
         public string Name { get; set; }
