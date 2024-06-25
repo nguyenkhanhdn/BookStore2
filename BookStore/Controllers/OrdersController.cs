@@ -22,6 +22,12 @@ namespace BookStore.Controllers
             return View(orders);
         }
 
+        public ActionResult OrderStatus()
+        {
+            var orders = db.Orders.ToList();
+            return View("OrderStatus",orders);
+        }
+
         // GET: Orders/Details/5
         public ActionResult Details(int? id)
         {
@@ -36,30 +42,9 @@ namespace BookStore.Controllers
             }
             return View(order);
         }
-        // GET: Orders/ProcessOrder
-        public ActionResult ProcessOrder(int? orderId)
-        {
-            if (orderId == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ViewBag.OrderId = orderId;
-            ViewBag.StatusId = new SelectList(db.Statuses, "Id", "Name");
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ProcessOrder([Bind(Include = "OrderId,ProcessedDate,Note,StatusId")] OrderStatus orderStatus)
-        {
-            if (ModelState.IsValid)
-            {
-                db.OrderStatus.Add(orderStatus);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(orderStatus);
-        }
-            // GET: Orders/Create
+               
+        
+        // GET: Orders/Create
         public ActionResult Create()
         {
             return View();
@@ -71,7 +56,7 @@ namespace BookStore.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,OrderedDate,DeliveryType,Address,Phone,Note,Status")] Order order)
+        public ActionResult Create([Bind(Include = "Id,Name,OrderedDate,DeliveryType,Address,Phone,Note")] Order order)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -86,7 +71,38 @@ namespace BookStore.Controllers
 
             return View(order);
         }
+        public ActionResult ProcessOrder(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Order order = db.Orders.Find(id);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            return View(order);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProcessOrder(int Id,string note)
+        {
+            var order = db.Orders.Find(Id);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            order.Note = note;
 
+            if (ModelState.IsValid)
+            {
+                db.Entry(order).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("OrderStatus");
+            }
+            return View(order);
+        }
         // GET: Orders/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -107,7 +123,7 @@ namespace BookStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,OrderedDate,DeliveryType,Address,Phone,Note,Status")] Order order)
+        public ActionResult Edit([Bind(Include = "Id,Name,OrderedDate,DeliveryType,Address,Phone,Note")] Order order)
         {
             if (ModelState.IsValid)
             {

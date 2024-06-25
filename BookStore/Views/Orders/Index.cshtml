@@ -62,8 +62,8 @@
                     @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Xóa", "Delete", new { id = item.Id }) |
-                  
-                    <a href="~/Orders/ProcessOrder?orderId=@item.Id">Xử lý đơn</a>
+
+                    @Html.ActionLink("Xử lý đơn", "ProcessOrder", new { id = item.Id })
                 </td>
             </tr>
         }
